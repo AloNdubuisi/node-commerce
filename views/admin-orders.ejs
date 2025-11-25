@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Orders - Simple Store</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+    <div class="container">
+        <a href="/"><h1 class="logo">Simple Store</h1></a>
+        <div class="nav-links">
+            <a href="/">Products</a>
+            <a href="/cart" class="cart-link">
+                Cart (<span id="cart-count">0</span>)
+            </a>
+
+            <% if (adminLoggedIn) { %>
+                <a href="/admin">Admin</a>
+                <a href="/admin/logout">Logout</a>
+            <% } else { %>
+                <a href="/admin/login">Admin Login</a>
+            <% } %>
+        </div>
+    </div>
+    </nav>
+
+    <div class="container">
+        <h2>All Customer Orders</h2>
+
+        <% if (orders.length === 0) { %>
+            <p>No orders yet.</p>
+        <% } else { %>
+            <table class="products-table">
+                <thead>
+                    <tr>
+                        <th>Customer</th>
+                        <th>Items</th>
+                        <th>Total</th>
+                        <th>Status</th>
+                        <th>Created At</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% orders.forEach(order => { %>
+                        <tr>
+                            <td>
+                                <strong><%= order.customer.fullname %></strong><br>
+                                <%= order.customer.email %><br>
+                                <%= order.customer.phone %>
+                            </td>
+                            <td>
+                                <% order.items.forEach(item => { %>
+                                    <div><%= item.name %> x <%= item.quantity %></div>
+                                <% }) %>
+                            </td>
+                            <td>$<%= order.total.toFixed(2) %></td>
+                            <td>
+                                <select class="status-select" data-id="<%= order._id %>">
+                                    <option value="Pending" <%= order.status === 'Pending' ? 'selected' : '' %>>Pending</option>
+                                    <option value="Processing" <%= order.status === 'Processing' ? 'selected' : '' %>>Processing</option>
+                                    <option value="Completed" <%= order.status === 'Completed' ? 'selected' : '' %>>Completed</option>
+                                    <option value="Cancelled" <%= order.status === 'Cancelled' ? 'selected' : '' %>>Cancelled</option>
+                                </select>
+                            </td>
+                            <td><%= new Date(order.createdAt).toLocaleString() %></td>
+                            <td>
+                                <button onclick="updateStatus('<%= order._id %>')" class="btn-small">Update</button>
+                            </td>
+                        </tr>
+                    <% }) %>
+                </tbody>
+            </table>
+        <% } %>
+    </div>
+
+    <script>
+        async function updateStatus(orderId) {
+            const select = document.querySelector(`.status-select[data-id='${orderId}']`);
+            const newStatus = select.value;
+
+            try {
+                const res = await fetch(`/api/orders/${orderId}/status`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ status: newStatus })
+                });
+
+                if (res.ok) {
+                    alert('Order status updated!');
+                    window.location.reload();
+                } else {
+                    alert('Failed to update status.');
+                }
+            } catch (err) {
+                console.error(err);
+                alert('Error updating status.');
+            }
+        }
+    </script>
+</body>
+</html>

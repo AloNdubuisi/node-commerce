@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Successful - Simple Store</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="container">
+            <a href="/"><h1 class="logo">Simple Store</h1></a>
+            <div class="nav-links">
+                <a href="/">Products</a>
+                <a href="/cart" class="cart-link">
+                    Cart (<span id="cart-count">0</span>)
+                </a>
+                <a href="/admin">Admin</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="success-page">
+            <div class="success-icon">✓</div>
+            <h2>Order Successful!</h2>
+            <p>Thank you for your purchase. Your order has been confirmed.</p>
+            <p>You will receive an email confirmation shortly.</p>
+            <a href="/" class="btn btn-primary">Continue Shopping</a>
+        </div>
+    </div>
+
+    <script src="/js/cart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartCount();
+        });
+    </script>
+</body>
+</html>
