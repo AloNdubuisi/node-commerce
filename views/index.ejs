@@ -8,17 +8,26 @@
 </head>
 <body>
     <nav class="navbar">
-        <div class="container">
-            <a href="/"><h1 class="logo">Simple Store</h1></a>
-            <div class="nav-links">
-                <a href="/">Products</a>
-                <a href="/cart" class="cart-link">
-                    Cart (<span id="cart-count">0</span>)
-                </a>
-                <a href="/admin">Admin</a>
-            </div>
+    <div class="container">
+        <a href="/"><h1 class="logo">Simple Store</h1></a>
+
+        <button class="hamburger" aria-label="Toggle navigation">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+
+        <div class="nav-links">
+            <a href="/">Products</a>
+            <a href="/cart" class="cart-link">
+                Cart (<span id="cart-count">0</span>)
+            </a>
+            <!-- <a href="/admin">Admin</a> -->
         </div>
-    </nav>
+    </div>
+</nav>
+
+
 
     <div class="container">
         <h2>NEW ARRIVALS OF PRODUCTS</h2>
@@ -40,6 +49,7 @@
     </div>
 
     <script src="/js/cart.js"></script>
+    <script src="/js/main.js"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             updateCartCount();

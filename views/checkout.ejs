@@ -1,15 +1,24 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - Simple Store</title>
     <link rel="stylesheet" href="/css/styles.css">
 </head>
+
 <body>
     <nav class="navbar">
         <div class="container">
-            <a href="/"><h1 class="logo">Simple Store</h1></a>
+            <a href="/">
+                <h1 class="logo">Simple Store</h1>
+            </a>
+            <button class="hamburger" aria-label="Toggle navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
             <div class="nav-links">
                 <a href="/">Products</a>
                 <a href="/cart" class="cart-link">
@@ -22,7 +31,7 @@
 
     <div class="container">
         <h2>Checkout</h2>
-        
+
         <div class="checkout-container">
             <div class="checkout-form">
                 <h3>Shipping Information</h3>
@@ -51,7 +60,7 @@
                         <label>Postal Code*</label>
                         <input type="text" id="postal" required>
                     </div>
-                    
+
                     <button type="submit" class="btn btn-primary">Complete Order</button>
                 </form>
             </div>
@@ -75,7 +84,7 @@
 
         function loadOrderSummary() {
             const cart = JSON.parse(localStorage.getItem('cart') || '[]');
-            
+
             if (cart.length === 0) {
                 window.location.href = '/cart';
                 return;
@@ -95,7 +104,7 @@
 
         document.getElementById('checkout-form').addEventListener('submit', async (e) => {
             e.preventDefault();
-            
+
             const cart = JSON.parse(localStorage.getItem('cart') || '[]');
             const order = {
                 customer: {
@@ -137,4 +146,5 @@
         });
     </script>
 </body>
+
 </html>

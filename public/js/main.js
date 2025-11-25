@@ -1,5 +1,10 @@
-// LocalStorage helper functions
+const hamburger = document.querySelector('.hamburger');
+const navLinks = document.querySelector('.nav-links');
 
+hamburger.addEventListener('click', () => {
+    navLinks.classList.toggle('active');
+    hamburger.classList.toggle('active');
+});
 // Get products from localStorage
 function getProducts() {
     const products = localStorage.getItem('products');

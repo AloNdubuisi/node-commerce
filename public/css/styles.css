@@ -17,42 +17,51 @@ body {
     padding: 20px;
 }
 
-/* Navigation */
+/* Navbar base styles */
 .navbar {
-    background-color: #2c3e50;
-    color: white;
-    padding: 1rem 0;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    background: #333333;
+    color: #fff;
+    padding: 0.5rem 1rem;
 }
-
 .navbar .container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
-.logo {
+.navbar .logo {
+    color: #fff;
+    margin: 0;
     font-size: 1.5rem;
-    color: white;
+    text-decoration: none;
 }
-
-.nav-links {
-    display: flex;
-    gap: 20px;
-}
-
-.nav-links a {
-    color: white;
+.navbar .nav-links a {
+    color: #fff;
+    margin-left: 1rem;
     text-decoration: none;
     transition: color 0.3s;
 }
-
-.nav-links a:hover {
-    color: #3498db;
+.navbar .nav-links a:hover {
+    color: #ffd700;
 }
 
-.cart-link {
-    font-weight: bold;
+/* Hamburger styles */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 25px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    z-index: 1001;
+}
+.hamburger .bar {
+    height: 3px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 3px;
+    transition: all 0.3s;
 }
 
 /* Products Grid */
@@ -343,6 +352,42 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+.hamburger {
+        display: flex;
+    }
+
+    .nav-links {
+        position: absolute;
+        top: 60px;
+        left: 0;
+        width: 100%;
+        background: #1A1A1A;
+        flex-direction: column;
+        display: none;
+        text-align: center;
+        transition: max-height 0.3s ease;
+        overflow: hidden;
+    }
+
+    .nav-links a {
+        margin: 1rem 0;
+        padding: 0.5rem 0;
+    }
+
+    .nav-links.active {
+        display: flex;
+    }
+
+    /* Hamburger to X transformation */
+    .hamburger.active .bar:nth-child(1) {
+        transform: rotate(45deg) translate(5px, 5px);
+    }
+    .hamburger.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+    .hamburger.active .bar:nth-child(3) {
+        transform: rotate(-45deg) translate(5px, -5px);
+    }
     .checkout-container {
         grid-template-columns: 1fr;
     }
